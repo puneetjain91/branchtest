@@ -1,6 +1,7 @@
 name: branchname
 env:
-    var: $(echo $github.ref | cut -d'/' -f 3)
+ shell: bash
+ run: echo "BR_NAME= $(echo $github.ref | cut -d'/' -f 3)"
 on:
   push:
     branches:
@@ -11,7 +12,7 @@ jobs:
   build:
     
      
-    name: "Polaris-SAST Scan for merge to: ${{var}}"
+    name: "Polaris-SAST Scan for merge to:  ${{BR_NAME}}"
     #${{ github.ref }} 
     #$(echo $GITHUB_REF | cut -d'/' -f 3)
     runs-on: ubuntu-latest
