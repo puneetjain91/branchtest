@@ -15,7 +15,7 @@ jobs:
     shell: bash
     run: echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
   - name: Debug
-    run: echo ${{ env.BRANCH_NAME }}
+    run: echo ${{ env.BR_NAME }}
    
 #  job2:
 #     name: "Polaris-SAST Scan for merge to:  ${{env.BR_NAME}}"
