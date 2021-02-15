@@ -6,7 +6,7 @@ on:
       - dev
 jobs:
   build:
-    name: "Polaris-SAST Scan for merge to: ${{ github.base_ref }} "
+    name: "Polaris-SAST Scan for merge to: ${{ github.ref }} "
     runs-on: ubuntu-latest
     steps:
       - name: Get branch name (merge)
