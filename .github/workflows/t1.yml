@@ -15,21 +15,21 @@ jobs:
     shell: bash
     run: echo "BR_NAME= $(echo $github.ref | cut -d'/' -f 3)" >> $GITHUB_ENV
    
- job2:
-    name: "Polaris-SAST Scan for merge to:  ${{env.BR_NAME}}"
-    #${{ github.ref }} 
-    #$(echo $GITHUB_REF | cut -d'/' -f 3)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get branch name (merge)
-        if: github.event_name != 'pull_request'
-        shell: bash
-        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+#  job2:
+#     name: "Polaris-SAST Scan for merge to:  ${{env.BR_NAME}}"
+#     #${{ github.ref }} 
+#     #$(echo $GITHUB_REF | cut -d'/' -f 3)
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Get branch name (merge)
+#         if: github.event_name != 'pull_request'
+#         shell: bash
+#         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
 
 #       - name: Get branch name (pull request)
 #         if: github.event_name == 'pull_request'
 #         shell: bash
 #         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
-      - name: Debug
-        run: echo ${{ env.BRANCH_NAME }}
+#       - name: Debug
+#         run: echo ${{ env.BRANCH_NAME }}
