@@ -11,9 +11,8 @@ jobs:
   runs-on: ubuntu-latest
   steps:
   - name: "setting the variabel name"
-  env:
     shell: bash
-    run: echo "BR_NAME= $(echo $github.ref | cut -d'/' -f 3)"
+    run: echo "BR_NAME= $(echo $github.ref | cut -d'/' -f 3)" >> $GITHUB_ENV
    
  build:
     name: "Polaris-SAST Scan for merge to:  ${{env.BR_NAME}}"
