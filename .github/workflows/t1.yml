@@ -1,13 +1,17 @@
 name: branchname
-
+env:
+    var: $(echo $github.ref | cut -d'/' -f 3)
 on:
   push:
     branches:
       - dev
 
+
 jobs:
   build:
-    name: "Polaris-SAST Scan for merge to: ${{ $(echo $github.ref | cut -d'/' -f 3) }}"
+    
+     
+    name: "Polaris-SAST Scan for merge to: ${{env.var}}"
     #${{ github.ref }} 
     #$(echo $GITHUB_REF | cut -d'/' -f 3)
     runs-on: ubuntu-latest
