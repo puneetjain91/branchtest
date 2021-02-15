@@ -8,13 +8,14 @@ on:
 
 jobs:
  job1:
+  name: "job1"
   runs-on: ubuntu-latest
   steps:
   - name: "setting the variabel name"
     shell: bash
     run: echo "BR_NAME= $(echo $github.ref | cut -d'/' -f 3)" >> $GITHUB_ENV
    
- build:
+ job2:
     name: "Polaris-SAST Scan for merge to:  ${{env.BR_NAME}}"
     #${{ github.ref }} 
     #$(echo $GITHUB_REF | cut -d'/' -f 3)
