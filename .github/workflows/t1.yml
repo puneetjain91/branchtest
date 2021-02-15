@@ -11,7 +11,7 @@ jobs:
   build:
     
      
-    name: "Polaris-SAST Scan for merge to: ${{env.var}}"
+    name: "Polaris-SAST Scan for merge to: ${{var}}"
     #${{ github.ref }} 
     #$(echo $GITHUB_REF | cut -d'/' -f 3)
     runs-on: ubuntu-latest
