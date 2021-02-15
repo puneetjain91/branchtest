@@ -14,6 +14,8 @@ jobs:
   - name: "setting the variabel name"
     shell: bash
     run: echo "BR_NAME= $(echo $github.ref | cut -d'/' -f 3)" >> $GITHUB_ENV
+  - name: Debug
+    run: echo ${{ env.BRANCH_NAME }}
    
 #  job2:
 #     name: "Polaris-SAST Scan for merge to:  ${{env.BR_NAME}}"
