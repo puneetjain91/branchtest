@@ -9,6 +9,8 @@ on:
 jobs:
  job1:
   runs-on: ubuntu-latest
+  steps:
+  - name: "setting the variabel name"
   env:
     shell: bash
     run: echo "BR_NAME= $(echo $github.ref | cut -d'/' -f 3)"
