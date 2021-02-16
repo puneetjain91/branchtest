@@ -4,18 +4,33 @@ on:
   push:
     branches:
       - dev
-
-
 jobs:
-  set-env:
+#   set-env:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Set environment variables
+#         run: |
+#           echo "GIT_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+#           echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+#       - name: Use environment variables
+#         run: |
+#           echo "GIT_SHA=${GIT_SHA}"
+#           echo "GIT_BRANCH=${GIT_BRANCH}"
+  get-env:
+    
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v2
+         - name: run build
+           run: |
+             echo "::set-env name=GITHUB_REF::${{ github.ref }}"
+             echo "old GITHUB_REF is $GITHUB_REF"
+             GITHUB_REF=$(echo $GITHUB_REF | sed -e "s#refs/heads/##g")
+             echo "new GITHUB_REF is $GITHUB_REF"
+  
+  Polaris-SAST-Scan:
+    name: "Polaris-SAST Scan for merge to: ${{GITHUB_REF}} "
     runs-on: ubuntu-latest
     steps:
-      - name: Set environment variables
-        run: |
-          echo "GIT_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
-          echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
-      - name: Use environment variables
-        run: |
-          echo "GIT_SHA=${GIT_SHA}"
-          echo "GIT_BRANCH=${GIT_BRANCH}"
-  
+      - name: Checkout the repository
+        uses: actions/checkout@v1
