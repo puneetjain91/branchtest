@@ -7,19 +7,22 @@ on:
 
 
 jobs:
-#  job1:
-#   name: "job1"
-#   runs-on: ubuntu-latest
-#   steps:
-#   - name: "setting the variabel name"
-#     shell: bash
-#     run: |
-#      echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
-#   - name: Debug
-#     run: echo ${{ env.BR_NAME }}
-   
- job2:
-    name: "Polaris-SAST Scan for merge to:"
+  job1:
+   name: "Polaris-SAST Scan for merge to:"
+   runs-on: ubuntu-latest
+   steps:
+   - name: Set the value
+     id: step_one
+     run: |
+        echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+   - name: Use the value
+     id: step_two
+     run: |
+        echo "${{ env.BR_NAME }}" # This will output 'yellow'
+   - name: Debug
+     run: echo ${{ env.BR_NAME }}
+  job2:
+    name: "Polaris-SAST"
     #${{ github.ref }} 
     #$(echo $GITHUB_REF | cut -d'/' -f 3)
     runs-on: ubuntu-latest
@@ -35,6 +38,18 @@ jobs:
         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
       - name: "Polaris-SAST Scan for merge to:  ${{ env.BRANCH_NAME }}"
-        run: echo ${{ env.BRANCH_NAME }}
+        run: echo ${{ env.BRANCH_NAME }}        
+
+#   name: "job1"
+#   runs-on: ubuntu-latest
+#   steps:
+#   - name: "setting the variabel name"
+#     shell: bash
+#     run: |
+#      echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+#   - name: Debug
+#     run: echo ${{ env.BR_NAME }}
+
+
     
     
