@@ -7,49 +7,18 @@ on:
 
 
 jobs:
-  job1:
-   name: "Polaris-SAST Scan for merge to:"
-   runs-on: ubuntu-latest
-   steps:
-   - name: Set the value
-     id: step_one
-     run: |
-        echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
-   - name: Use the value
-     id: step_two
-     run: |
-        echo "${{ env.BR_NAME }}" # This will output 'yellow' ${{ env.BRANCH_NAME }}
-   - name: Debug
-     run: echo ${{ env.BR_NAME }}
-  job2:
-    name: "Polaris-SAST: ${{ env.BRANCH_NAME }}"
-    #${{ github.ref }} 
-    #$(echo $GITHUB_REF | cut -d'/' -f 3)
+  set-env:
     runs-on: ubuntu-latest
     steps:
-#       - name: Get branch name (merge)
-#         if: github.event_name != 'pull_request'
-#         shell: bash
-#         run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | tr / -)" >> $GITHUB_ENV
+      - name: Set environment variables
+        run: |
+          echo "GIT_SHA=${GITHUB_SHA}" >> $GITHUB_ENV
+          echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+      - name: Use environment variables
+        run: |
+          echo "GIT_SHA=${GIT_SHA}"
+          echo "GIT_BRANCH=${GIT_BRANCH}"
+  
+  name: "Polaris-SAST Scan for merge to: ${{ env.GIT_BRANCH}} "
 
-      - name: Get branch name (pull request)
-        if: github.event_name == 'pull_request'
-        shell: bash
-        run: echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
-
-      - name: "Polaris-SAST Scan for merge to:  ${{ env.BRANCH_NAME }}"
-        run: echo ${{ env.BRANCH_NAME }}        
-
-#   name: "job1"
-#   runs-on: ubuntu-latest
-#   steps:
-#   - name: "setting the variabel name"
-#     shell: bash
-#     run: |
-#      echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
-#   - name: Debug
-#     run: echo ${{ env.BR_NAME }}
-
-
-    
     
