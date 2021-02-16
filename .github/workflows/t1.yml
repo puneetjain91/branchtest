@@ -19,6 +19,3 @@ jobs:
           echo "GIT_SHA=${GIT_SHA}"
           echo "GIT_BRANCH=${GIT_BRANCH}"
   
-  name: "Polaris-SAST Scan for merge to: ${{ env.GIT_BRANCH}} "
-
-    
