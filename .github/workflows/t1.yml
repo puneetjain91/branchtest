@@ -18,11 +18,11 @@ jobs:
    - name: Use the value
      id: step_two
      run: |
-        echo "${{ env.BR_NAME }}" # This will output 'yellow'
+        echo "${{ env.BR_NAME }}" # This will output 'yellow' ${{ env.BRANCH_NAME }}
    - name: Debug
      run: echo ${{ env.BR_NAME }}
   job2:
-    name: "Polaris-SAST"
+    name: "Polaris-SAST: ${{ env.BRANCH_NAME }}"
     #${{ github.ref }} 
     #$(echo $GITHUB_REF | cut -d'/' -f 3)
     runs-on: ubuntu-latest
