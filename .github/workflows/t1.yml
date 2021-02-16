@@ -7,19 +7,19 @@ on:
 
 
 jobs:
- job1:
-  name: "job1"
-  runs-on: ubuntu-latest
-  steps:
-  - name: "setting the variabel name"
-    shell: bash
-    run: |
-     echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
-  - name: Debug
-    run: echo ${{ env.BR_NAME }}
+#  job1:
+#   name: "job1"
+#   runs-on: ubuntu-latest
+#   steps:
+#   - name: "setting the variabel name"
+#     shell: bash
+#     run: |
+#      echo "BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)" >> $GITHUB_ENV
+#   - name: Debug
+#     run: echo ${{ env.BR_NAME }}
    
  job2:
-    name: "Polaris-SAST Scan for merge to:  ${{BR_NAME= $(echo $GITHUB_REF | cut -d'/' -f 3)}}"
+    name: "Polaris-SAST Scan for merge to:  ${{$(echo $GITHUB_REF | cut -d'/' -f 3)}}"
     #${{ github.ref }} 
     #$(echo $GITHUB_REF | cut -d'/' -f 3)
     runs-on: ubuntu-latest
@@ -34,5 +34,7 @@ jobs:
         shell: bash
         run: echo "BRANCH_NAME=$(echo ${GITHUB_HEAD_REF} | tr / -)" >> $GITHUB_ENV
 
-#       - name: Debug
-#         run: echo ${{ env.BRANCH_NAME }}
+      - name: Debug
+        run: echo ${{ env.BRANCH_NAME }}
+    
+      - name: "Polaris-SAST Scan for merge to:  ${{ env.BRANCH_NAME }}"
