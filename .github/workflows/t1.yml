@@ -30,7 +30,7 @@ jobs:
            shell: bash
            run: |
              echo "BRANCH_NAME=$(echo '${{github.ref}}' | awk -F '/' '{print $3}')" >> $GITHUB_ENV
-             echo "BRANCH_NAME=$(BRANCH_NAME)"
+             echo "BRANCH_NAME=${{env.BRANCH_NAME}}"
   
 #  Polaris-SAST-Scan:
 #     needs: GET-ENV
