@@ -15,7 +15,7 @@ jobs:
 #       - name: Use environment variables
 #         run: |
 #           echo "GIT_SHA=${GIT_SHA}"
-#           echo "GIT_BRANCH=${GIT_BRANCH}"
+#           echo "GIT_BRANCH=$(GIT_BRANCH)"
  GET-ENV:
        name: "Polaris-Get ENV"
        runs-on: ubuntu-latest
