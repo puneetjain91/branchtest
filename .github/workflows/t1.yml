@@ -29,7 +29,7 @@ jobs:
 #              echo "new GITHUB_REF is $GITHUB_REF"
            shell: bash
            run: |
-             echo (${{ github.ref }})
+             echo ${{github.ref}}
              echo $BRANCH_NAME
   
 #  Polaris-SAST-Scan:
