@@ -30,8 +30,8 @@ jobs:
            shell: bash
            run: |
              echo "GIT_BRANCH=$(echo '${{github.ref}}' | awk -F '/' '{print $3}')" >> $GITHUB_ENV
-             echo "BRANCH_NAME=${GIT_BRANCH}"
-  
+             echo $(GIT_BRANCH)
+               
 #  Polaris-SAST-Scan:
 #     needs: GET-ENV
 #     name: "Polaris-SAST Scan for merge to: ${{GITHUB_REF}} "
