@@ -22,16 +22,19 @@ jobs:
        steps:
          - uses: actions/checkout@v2
          - name: run build
+#            run: |
+#              echo "::set-env name=GITHUB_REF::${{ github.ref }}"
+#              echo "old GITHUB_REF is $GITHUB_REF"
+#              GITHUB_REF=$(echo $GITHUB_REF | sed -e "s#refs/heads/##g")
+#              echo "new GITHUB_REF is $GITHUB_REF"
            run: |
-             echo "::set-env name=GITHUB_REF::${{ github.ref }}"
-             echo "old GITHUB_REF is $GITHUB_REF"
-             GITHUB_REF=$(echo $GITHUB_REF | sed -e "s#refs/heads/##g")
-             echo "new GITHUB_REF is $GITHUB_REF"
+             echo "BRANCH_NAME=$(echo $github.ref | awk -F/ '{print $3}')" >> $GITHUB_ENV
+             echo $BRANCH_NAME 
   
- Polaris-SAST-Scan:
-    needs: GET-ENV
-    name: "Polaris-SAST Scan for merge to: ${{GITHUB_REF}} "
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v1
+#  Polaris-SAST-Scan:
+#     needs: GET-ENV
+#     name: "Polaris-SAST Scan for merge to: ${{GITHUB_REF}} "
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout the repository
+#         uses: actions/checkout@v1
