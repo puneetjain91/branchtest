@@ -16,8 +16,8 @@ jobs:
 #         run: |
 #           echo "GIT_SHA=${GIT_SHA}"
 #           echo "GIT_BRANCH=${GIT_BRANCH}"
-  get-env:
-    
+ GET-ENV:
+       name: "Polaris-Get ENV"
        runs-on: ubuntu-latest
        steps:
          - uses: actions/checkout@v2
@@ -28,7 +28,8 @@ jobs:
              GITHUB_REF=$(echo $GITHUB_REF | sed -e "s#refs/heads/##g")
              echo "new GITHUB_REF is $GITHUB_REF"
   
-  Polaris-SAST-Scan:
+ Polaris-SAST-Scan:
+    needs: GET-ENV
     name: "Polaris-SAST Scan for merge to: ${{GITHUB_REF}} "
     runs-on: ubuntu-latest
     steps:
